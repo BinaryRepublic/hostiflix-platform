@@ -1,4 +1,4 @@
 provider "google" {
-  project     = "triangl-215714"
+  project     = "project-cloud-231013"
   region      = "europe-west3"
 }
