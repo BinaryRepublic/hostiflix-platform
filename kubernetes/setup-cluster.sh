@@ -29,5 +29,4 @@ while [ -z "$LOAD_BALANCER_IP" ]; do
     echo "Waiting for load balancer..."
 done
 
-echo "########"
-echo "Make sure your DNS records are pointing to the cluster and you are reaching the default-backend using your domain."
+echo "Load balancer IP is $LOAD_BALANCER_IP"
