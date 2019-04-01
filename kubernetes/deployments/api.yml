@@ -1,0 +1,60 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      volumes:
+        - name: google-cloud-key
+          secret:
+            secretName: google-cloud-key
+      containers:
+        - name: api
+          image: eu.gcr.io/project-cloud-231013/api:latest
+          volumeMounts:
+            - name: google-cloud-key
+              mountPath: /var/secrets/google
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/key.json
+            - name: GITHUB_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: github-application-credentials
+                  key: client_id
+            - name: GITHUB_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: github-application-credentials
+                  key: client_secret
+            - name: SPRING_PROFILES_ACTIVE
+              value: production
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://google/hostiflix?cloudSqlInstance=project-cloud-231013:europe-west3:hostiflix&socketFactory=com.google.cloud.sql.postgres.SocketFactory&useSSL=false
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: password
+#          livenessProbe:
+#            httpGet:
+#              path: /actuator/info
+#              port: 8080
+#            initialDelaySeconds: 120
+#            timeoutSeconds: 2
+#            periodSeconds: 5
+#            failureThreshold: 2
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health
+#              port: 8080
+#            initialDelaySeconds: 120
+#            timeoutSeconds: 2
+#            periodSeconds: 5
+#            failureThreshold: 2
+          resources:
+            requests:
+              cpu: 100m

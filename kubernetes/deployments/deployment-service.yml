@@ -1,0 +1,13 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: deployment-service
+spec:
+  template:
+    metadata:
+      labels:
+        app: deployment-service
+    spec:
+      containers:
+        - name: deployment-service
+          image: eu.gcr.io/project-cloud-231013/deployment-service:latest

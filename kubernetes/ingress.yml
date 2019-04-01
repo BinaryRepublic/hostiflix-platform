@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+        - hostiflix.com
+      secretName: crt-prod
+    - hosts:
+        - api.hostiflix.com
+      secretName: crt-api-prod
+  rules:
+    - host: hostiflix.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: webapp
+              servicePort: 3000
+    - host: api.hostiflix.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: api
+              servicePort: 80
