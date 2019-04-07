@@ -12,7 +12,7 @@ resource "google_container_cluster" "primary" {
   node_pool = [
     {
       name = "${var.default_node_pool_name}"
-      node_count= 3
+      node_count= 2
     }
   ]
 }
@@ -21,7 +21,7 @@ resource "google_container_node_pool" "np" {
   name       = "${var.default_node_pool_name}"
   zone       = "europe-west3-a"
   cluster    = "${google_container_cluster.primary.name}"
-  node_count = 3
+  node_count = 2
 
   node_config {
     machine_type = "n1-standard-1"
