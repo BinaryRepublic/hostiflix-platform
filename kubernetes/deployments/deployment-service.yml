@@ -11,3 +11,26 @@ spec:
       containers:
         - name: deployment-service
           image: eu.gcr.io/project-cloud-231013/deployment-service:latest
+          env:
+            - name: API_BASE_URL
+              value: http://api
+            - name: GOOGLE_AUTH
+              valueFrom:
+                secretKeyRef:
+                  name: deployment-service-credentials
+                  key: GOOGLE_AUTH
+            - name: GCLOUD_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: deployment-service-credentials
+                  key: GCLOUD_PROJECT_ID
+            - name: GCLOUD_COMPUTE_ZONE
+              valueFrom:
+                secretKeyRef:
+                  name: deployment-service-credentials
+                  key: GCLOUD_COMPUTE_ZONE
+            - name: GCLOUD_CLUSTER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: deployment-service-credentials
+                  key: GCLOUD_CLUSTER_NAME

@@ -32,29 +32,14 @@ spec:
                   name: github-application-credentials
                   key: client_secret
             - name: SPRING_PROFILES_ACTIVE
-              value: production
+              value: production,default
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://google/hostiflix?cloudSqlInstance=project-cloud-231013:europe-west3:hostiflix&socketFactory=com.google.cloud.sql.postgres.SocketFactory&useSSL=false
+              value: jdbc:postgresql://google/hostiflix?cloudSqlInstance=project-cloud-231013:europe-west3:production&socketFactory=com.google.cloud.sql.postgres.SocketFactory&useSSL=false
             - name: SPRING_DATASOURCE_USERNAME
               value: postgres
             - name: SPRING_DATASOURCE_PASSWORD
               value: password
-#          livenessProbe:
-#            httpGet:
-#              path: /actuator/info
-#              port: 8080
-#            initialDelaySeconds: 120
-#            timeoutSeconds: 2
-#            periodSeconds: 5
-#            failureThreshold: 2
-#          readinessProbe:
-#            httpGet:
-#              path: /actuator/health
-#              port: 8080
-#            initialDelaySeconds: 120
-#            timeoutSeconds: 2
-#            periodSeconds: 5
-#            failureThreshold: 2
-          resources:
+            - name: JEDISCONFACTORY_HOSTNAME
+              value: redis
             requests:
               cpu: 100m

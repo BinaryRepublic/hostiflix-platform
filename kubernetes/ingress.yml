@@ -23,7 +23,7 @@ spec:
           - path: /
             backend:
               serviceName: webapp
-              servicePort: 3000
+              servicePort: 80
     - host: api.hostiflix.com
       http:
         paths:
