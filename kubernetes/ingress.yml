@@ -14,8 +14,8 @@ spec:
         - hostiflix.com
       secretName: crt-prod
     - hosts:
-        - api.hostiflix.com
-      secretName: crt-api-prod
+        - "*.hostiflix.com"
+      secretName: wildcard-hostiflix-com
   rules:
     - host: hostiflix.com
       http:
