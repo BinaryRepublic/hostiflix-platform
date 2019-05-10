@@ -11,3 +11,6 @@ spec:
       containers:
         - name: webapp
           image: eu.gcr.io/project-cloud-231013/webapp:latest
+          resources:
+            requests:
+              cpu: 50m

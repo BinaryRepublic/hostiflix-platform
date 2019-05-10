@@ -34,3 +34,6 @@ spec:
                 secretKeyRef:
                   name: deployment-service-credentials
                   key: GCLOUD_CLUSTER_NAME
+          resources:
+            requests:
+              cpu: 50m
